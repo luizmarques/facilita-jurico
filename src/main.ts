@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { PrismaNotFoundExceptionFilter } from './customers/exeption-filters/prisma-not-found.exception-filters';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -9,6 +10,8 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({
     errorHttpStatusCode: 422,
   }))
+
+  app.useGlobalFilters(new PrismaNotFoundExceptionFilter())
 
   const config = new DocumentBuilder()
     .setTitle('Facilita Jurídico API')
