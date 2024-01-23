@@ -52,3 +52,7 @@ POST http://localhost:3000/customers
 GET http://localhost:3000/customers/1
 
 GET http://localhost:3000/customers
+
+
+migration command:
+npx prisma migrate dev

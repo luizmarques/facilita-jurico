@@ -1,15 +1,16 @@
-import { IsNotEmpty, IsEmail, IsString } from 'class-validator';
+import { IsNotEmpty, IsEmail, IsString, MaxLength, Length, IsNumber, IsInt, Min, MinLength, IsNumberString } from 'class-validator';
 
 export class CreateCustomerDto {
-  @IsNotEmpty()
+  @MaxLength(255)
   @IsString()
-  nome: string;
+  @IsNotEmpty()
+  name: string;
 
+  @IsNumberString()
   @IsNotEmpty()
-  @IsString()
   cpf: string;
 
-  @IsNotEmpty()
   @IsEmail()
+  @IsNotEmpty()
   email: string;
 }

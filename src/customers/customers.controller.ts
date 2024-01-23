@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe, HttpCode } from '@nestjs/common';
 import { CustomersService } from './customers.service';
 import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
@@ -23,19 +23,20 @@ export class CustomersController {
   
   @ApiOperation({ summary: 'Show customer' })
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.customersService.findOne(+id);
+  findOne(@Param('id', new ParseIntPipe()) id: number) {
+    return this.customersService.findOne(id);
   }
   
   @ApiOperation({ summary: 'Update customer' })
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
-    return this.customersService.update(+id, updateCustomerDto);
+  update(@Param('id', new ParseIntPipe()) id: number, @Body() updateCustomerDto: UpdateCustomerDto) {
+    return this.customersService.update(id, updateCustomerDto);
   }
   
+  @HttpCode(204)
   @ApiOperation({ summary: 'Delete customer' })
   @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.customersService.remove(+id);
+  remove(@Param('id', new ParseIntPipe()) id: number) {
+    return this.customersService.remove(id);
   }
 }

@@ -2,5 +2,25 @@
 GET http://localhost:3000/customers
 ###
 POST http://localhost:3000/customers
+Content-Type: application/json
+
+{
+    "name": "Luiz Fernando",
+    "cpf": "1222233425672915",
+    "email": "l222u32iz_a2lak@hotmail.com"
+}
 ###
+
 GET http://localhost:3000/customers/1
+
+###
+PATCH http://localhost:3000/customers/1
+Content-Type: application/json
+
+{
+    "name": "Luiz Fernando Updated"
+}
+
+###
+DELETE http://localhost:3000/customers/1
+###
